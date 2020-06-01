@@ -16,6 +16,7 @@ module.exports = {
 	},
 
 	rules: {
+		'no-var': 2,
 		indent: [2, 'tab'],
 		quotes: ['error', 'single'],
 		'import/no-unresolved': [2, { commonjs: true }],
