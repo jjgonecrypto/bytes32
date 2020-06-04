@@ -4,9 +4,11 @@
 
 const bytes32 = require('.');
 
+const [, , input] = process.argv;
+
 console.log(
 	bytes32({
-		input: process.argv[2],
+		input,
 		ignoreLength: process.argv[3] === '--ignore-length',
 	}),
 );

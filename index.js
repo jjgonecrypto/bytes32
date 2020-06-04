@@ -14,8 +14,25 @@ const asciiToHex = function (str) {
 	return '0x' + hex;
 };
 
+// (ibid)
+const hexToAscii = function (hex) {
+	let str = '';
+	let i = 0;
+	if (hex.substring(0, 2) === '0x') {
+		i = 2;
+	}
+	for (; i < hex.length; i += 2) {
+		const code = parseInt(hex.substr(i, 2), 16);
+		str += String.fromCharCode(code);
+	}
+	return str;
+};
+
 module.exports = ({ input = '', ignoreLength = false }) => {
-	if (!ignoreLength && input.length > 32) {
+	if (/^(0x)?[0-9a-zA-Z]{64}$/.test(input)) {
+		// then it's bytes to str
+		return hexToAscii(input);
+	} else if (!ignoreLength && input.length > 32) {
 		throw Error(
 			`Input string is too long, must be maximum of 32. It is currently ${input.length}`,
 		);
