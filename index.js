@@ -29,7 +29,7 @@ const hexToAscii = function (hex) {
 };
 
 module.exports = ({ input = '', ignoreLength = false }) => {
-	if (/^(0x)?[0-9a-zA-Z]{64}$/.test(input)) {
+	if (/^0x[0-9a-zA-Z]+$/.test(input)) {
 		// then it's bytes to str
 		return hexToAscii(input);
 	} else if (!ignoreLength && input.length > 32) {
