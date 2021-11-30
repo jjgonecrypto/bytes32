@@ -35,15 +35,15 @@ module.exports = ({ input = '', ignoreLength = false }) => {
 		if (inputArray.length == 0) {
 			return hexToAscii(input);
 		} else {
-			console.log('\nVertical Output Collumn');
+			console.log('Vertical Output Collumn');
 			const outputArray = [];
 			for (let i = 0; i < inputArray.length; i++) {
 				outputArray.splice(i, 0, hexToAscii(inputArray[i]).split('\x00')[0]);
 				console.log(hexToAscii(inputArray[i]));
 			}
-			console.log('\nLine CSV Output');
+			console.log('\nInline CSV Output');
 			process.stdout.write(`${outputArray},`);
-			console.log('\n\n');
+			console.log('\n\nStandard Array Output');
 			return outputArray;
 		}
 	} else if (!ignoreLength && input.length > 32) {
