@@ -29,9 +29,23 @@ const hexToAscii = function (hex) {
 };
 
 module.exports = ({ input = '', ignoreLength = false }) => {
-	if (/^0x[0-9a-zA-Z]+$/.test(input)) {
+	if (/^0x[0-9a-zA-Z,]+$/.test(input)) {
 		// then it's bytes to str
-		return hexToAscii(input);
+		const inputArray = input.split(',');
+		if (inputArray.length == 0) {
+			return hexToAscii(input);
+		} else {
+			console.log('\nVertical Output Collumn');
+			const outputArray = [];
+			for (let i = 0; i < inputArray.length; i++) {
+				outputArray.splice(i, 0, hexToAscii(inputArray[i]).split('\x00')[0]);
+				console.log(hexToAscii(inputArray[i]));
+			}
+			console.log('\nLine CSV Output');
+			process.stdout.write(`${outputArray},`);
+			console.log('\n\n');
+			return outputArray;
+		}
 	} else if (!ignoreLength && input.length > 32) {
 		throw Error(
 			`Input string is too long, must be maximum of 32. It is currently ${input.length}`,
